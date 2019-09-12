@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load rest_framework %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sunny_poster/styles.css' %}">
+{% block page_content %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <title>{{ Section.title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    
+    <style type="text/css">.parallax_img-1 {
+    	height: 250px;
+    	background: url(https://previews.123rf.com/images/bulega/bulega1708/bulega170800110/84366674-anatomical-human-heart-hand-drawn-poster-with-inscription-of-vein-arteria-aorta-medicine-educational.jpg); no-repeat center;
+    	background-attachment: fixed;
+    	background-position: center;
+    	background-repeat: no-repeat;
+    	background-size: 100% auto;
+
+    }
+    @media screen and (max-width: 768px) {
+    	.parallax_img {
+    		background-attachment: inherit;
+    	}
+    }</style>
+    
+    <style type="text/css">.parallax_img-2 {
+    	height: 250px;
+    	background: linear-gradient(rgba(0,0,80,0.5), rgba(0,0,80,0.5)), url('/static/img/p2.jpg') no-repeat center;
+    	background-attachment: fixed;
+    	background-position: center;
+    	background-repeat: no-repeat;
+    	background-size: 100% auto;
+
+    }
+    @media screen and (max-width: 768px) {
+    	.parallax_img {
+    		background-attachment: inherit;
+    	}
+    }
+    
+    @media only screen and (max-device-width: 1366px) {
+          .parallax {
+            background-attachment: scroll;
+          }
+    }
+    </style>
+    
+    <style type="text/css">
+        <!--
+         .tab { margin-left: 40px; }
+        -->
+    </style>
+    
+</head>
+
+<div class="jumbotron jumbo_text myBackground">
+    <h1 class="display-6 font-weight-bold mb-2 wow fadeInDown" data-wow-delay="0.3s"> {{ Section.title }} </h1>
+    <small> J Quinto, T Escartin, S Singh, J Barry, P Krahn, X Qi, P Lin, M Li, M Larsen, S Ferguson, G Wright, M Pop </small> 
+
+</div>
+
+<div id="navbar">{
+    <a href="{% url 'sections-all' %}"> <i class="fa fa-fw fa-home"></i> Home </a>
+    {% for Section in Sections %} 
+        {% if not forloop.last %}
+            <a href="{% url 'section_detail' Section.pk %}"> {{ Section.title }}</a>
+        {% endif %}
+    {% endfor %}
+    
+  <script>
+      // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+    
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+    
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+    </script>
+</div>
+
+<div class="parallax_img-2" style="height: 10vh;"> 
+</div>
+
+<div class="jumbotron jumbo_text text-black myBackground">
+     <div class="card-body">
+        <p>{{ Section.description | linebreaks }}</p>
+     </div>
+</div>
+
+<div class="parallax_img-2" style="height: 10vh;"> 
+</div>
+{% endblock %}

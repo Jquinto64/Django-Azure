@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load rest_framework %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'sunny_poster/styles.css' %}">
+{% block page_content %}
+
+<head>
+    <title>High Resolution MR Image-based Heart Models for Electrophysiology Interventions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <style type="text/css">.parallax_img {
+    	height: 250px;
+    	background: linear-gradient(rgba(0,0,80,0.5), rgba(0,0,80,0.5)), url('/static/img/p2.jpg') no-repeat center;
+    	background-attachment: fixed;
+    	background-position: center;
+    	background-repeat: no-repeat;
+    	background-size: 100% auto;
+
+    }
+    @media screen and (max-width: 768px) {
+    	.parallax_img {
+    		background-attachment: inherit;
+    	}
+    }
+    @media only screen and (max-device-width: 1366px) {
+          .parallax {
+            background-attachment: scroll;
+          }
+    }
+    </style>
+    
+</head>
+
+<div class="jumbotron jumbo_text myBackground">
+  <h1 class="display-6 font-weight-bold mb-2 wow fadeInDown" data-wow-delay="0.3s">High Resolution MR Image-based Heart Models for Electrophysiology Interventions</h1>
+  <small> J Quinto, T Escartin, S Singh, J Barry, P Krahn, X Qi, P Lin, M Li, M Larsen, S Ferguson, G Wright, M Pop </small> 
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div id="navbar">{
+    <a href="{% url 'sections-all' %}"> <i class="fa fa-fw fa-home"></i> Home </a>
+    {% for Section in Sections %} 
+        {% if not forloop.last %}
+            <a href="{% url 'section_detail' Section.pk %}"> {{ Section.title }}</a>
+        {% endif %}
+    {% endfor %}
+    
+  <script>
+      // When the user scrolls the page, execute myFunction
+    window.onscroll = function() {myFunction()};
+    
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
+    
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
+    
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky")
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+    </script>
+</div>
+
+<div class="parallax_img" style="height: 10vh;"> 
+</div>
+
+<body>
+{% for Section in Sections %} 
+    <div class="jumbotron jumbo_text text-center text-black myBackground">
+        <div class="card-body"> 
+            <h2 class="display-6 font-weight-bold mb-2 wow fadeInDown" data-wow-delay="0.3s"> <a> {{ Section.title }} </a> </h2>
+        </div>
+         <a href="{% url 'section_detail' Section.pk %}"
+                           class="btn btn-primary">
+                            Read More...
+         </a>
+    </div>
+    {% if not forloop.last %}
+        <div class="parallax_img" style="height: 10vh;">
+        </div>
+    {% endif %}
+{% endfor %}
+</div>
+</body>
+</html>
+
+{% endblock %}
